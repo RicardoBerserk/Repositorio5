@@ -1,0 +1,18 @@
+﻿@*@{
+    Layout = "~/Views/Default/Index.cshtml";
+}*@
+@*@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+@{
+    string CurrentName = Convert.ToString(PageBase.getVista());
+    if (CurrentName.Equals("ON"))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    }
+
+}

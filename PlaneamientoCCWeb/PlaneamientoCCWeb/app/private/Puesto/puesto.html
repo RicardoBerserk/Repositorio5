@@ -1,0 +1,226 @@
+﻿
+
+<div class="bg" ng-controller="puestoController as vm">
+    <div class="container contenido-nuevo tabla">
+        <div class="clearfix"></div>
+        <div class="usuario-bienvenida">
+            <div class="welcome">
+                <h3>Puesto</h3>
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div id="Idregularizar">
+                <form name="frmConsultarPuestos" class="form-horizontal" role="form" novalidate ng-submit="vm.BuscarPuestos(frmConsultarPuestos.$valid)">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Codigo Puesto:* </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" disabled="disabled" ng-model="vm.Regularizar.moduloConsulta" placeholder="Ingrese Puesto" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nombre Puesto:* </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" ng-model="vm.Regularizar.cuentaConsulta" placeholder="Ingrese cuenta BT" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <div class="form-group">
+                                <button type="submit" class="btn blue-dark"> Buscar</button>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-2">
+                            <div class="form-group">
+                                <button type="button" class="btn blue-dark" ng-click="vm.LimpiarBusqueda()"> Limpiarrrr</button>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-2">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Puestos">
+                                    <span class="fa fa-plus"></span> Nuevo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class=" col-md-13">
+                            <div class="dataTables_length" id="sample_1_length">
+                                <label>
+                                    <select name="sample_1_length" aria-controls="sample_1" class="form-control input-xsmall input-inline"
+                                            ng-model="vm.Regularizar.cantidadRegistros" ng-selected="vm.Regularizar.cantidadRegistros" ng-change="vm.PageChaged()">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    registros
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover" id="tablaRegularizar">
+                            <thead>
+                                <tr class="principal">
+                                    <td class="text-center">Seleccionar</td>
+                                    <th class="text-center">Código Puesto </th>
+                                    <th class="text-center">Nombre Puesto</th>
+                                    <th class="text-center">Tipo Puesto</th>
+                                    <th class="text-center">Nombre Puesto RRHH</th>
+                                    <th class="text-center">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="coloc in vm.Colocaciones" ng-click="vm.resetAll(coloc)" ng-class="{'success':coloc.seleccionado}">
+                                    <td class="data-centrada">
+                                        <input type="radio" name="radio-primary" ng-value="true" ng-model="coloc.seleccionado" ng-checked="coloc.seleccionado" />
+                                    </td>
+                                    <td class="text-center">{{coloc.fecha}}</td>
+                                    <td class="text-center">{{coloc.cuentaBT}}</td>
+                                    <td class="text-center">{{coloc.operacion}}</td>
+                                    <td class="text-center">{{coloc.subOperacion}}</td>
+                                    <td class="text-center">{{coloc.modulo}}</td>
+                                    <td class="text-center">{{coloc.sucursalVend}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center" colspan="12">
+                                        <div class="pull-right">
+                                            <pagination total-items="vm.Regularizar.totalCount" ng-change="vm.PageChaged()" items-per-page="vm.Regularizar.cantidadRegistros" first-text="<<" previous-text="<" next-text=">" last-text=">>" direction-links="true" ng-model="vm.Regularizar.paginaActual" max-size="1" class="pagination" boundary-links="true" num-pages="numPages"></pagination>
+                                            <a class="btn btn-primary">Page: {{vm.Regularizar.paginaActual}} / {{numPages}}</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="Puestos" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Agregar Puestos</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" novalidate role="form" name="frmPuestos" >
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Codigo Puesto:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtCodigoPuesto" autofocus autocomplete="off" required maxlength="6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Nombre de Puesto:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtNombPuesto" autofocus autocomplete="off" required maxlength="200">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Tipo Puesto:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtTipoPuesto" autofocus autocomplete="off" required maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Código puesto meta:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtmeta" autofocus autocomplete="off" required maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Sigla:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtSigla" autofocus autocomplete="off" required maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Nombre Puestos RR.HH.:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtNombPuestoRRHH" autofocus autocomplete="off" required maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Empresa:</label>
+                                    <div class="col-md-8">
+                                        <select ng-model="vm.data.codempresa" id="cmbProducto" name="ProductoM" class="form-control" ng-options="emp.id as emp.nombre for emp in vm.empresaList " ng-change="vm.CargaDataPorEmpresa(vm.data.codempresa)" required>
+                                            <option value="">--Seleccione--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div ng-dropdown-multiselect="" options="example14data" selected-model="example14model" checkboxes="true" extra-settings="example14settings"></div> <pre>Selected Model: {{example14model}} | json</pre>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-6 col-md-3">
+                                <p>
+                                    <button class="btn btn-danger btn-block" type="button" data-dismiss="modal" ng-click="vm.cancelaModal()">
+                                        <span class="fa fa-arrow-circle-left "></span> Cerrar
+                                    </button>
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>
+                                    <button class="btn btn-primary btn-block" type="submit">
+                                        <span class="fa fa-save"></span> Registrar
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+

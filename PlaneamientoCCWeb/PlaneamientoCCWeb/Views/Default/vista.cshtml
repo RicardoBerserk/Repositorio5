@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Aplicación Sirena</title>
+
+    @*<base href="/">*@
+
+    @Styles.Render("~/bundles/PlaneamientoStyles")
+    @Scripts.Render("~/bundles/bootstrapjs")
+
+</head>
+@{
+    ViewBag.Title = "Aplicación Scotiabank";
+}
+
+<body class="wrapper" ng-controller="applicationController as vm" ng-init="init('@System.Configuration.ConfigurationManager.AppSettings["WebApiUrl"]')" onselectstart="return false;" ondragstart="return false;">
+    <style>
+        #texto-version {
+            font-size: 10px;
+            text-align: right;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+            #texto-version:hover {
+                color: white;
+            }
+    </style>
+
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="" ng-click="vm.callInicio()" id="texto-version">
+                    <img src="~/Images/Scotiabank.gif" />
+                    v. @ViewContext.Controller.GetType().Assembly.GetName().Version
+                </a>
+            </div>
+            <div class="collapse navbar-collapse menuCOMFFVV" id="bs-example-navbar-collapse-1">
+                @*<script type="text/ng-template" id="treeMenu">
+                        <a ui-sref="{{menu.urlMenu}}">{{menu.nombreMenu}}</a>
+                        <ul ng-if="(vm.MenuList | filter:{idMenuPadre : menu.idMenu}).length > 0">
+                            <li ng-repeat="menu in vm.MenuList | filter:{idMenuPadre : menu.idMenu}" ng-include="'treeMenu'"></li>
+                        </ul>
+                    </script>
+
+                    <ul class="main-navigation">
+                        <li ng-repeat="menu in vm.MenuList | filter:{idMenuPadre : 0}" ng-include="'treeMenu'"></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-if="!vm.showLogout() && !vm.showMenus()"><a href="" id="btn-como-pagar" ng-click="vm.callInicio()">Inicio</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="login" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="RegularizacionInterna" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Regularización Interna</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="Regularizacion" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Regularización</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="Autorizacion" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Autorización</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="home" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> menu</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="Puestos" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Puestos</a></li>
+                        <li ng-if="vm.showLogout()"><a class="btn-pastel" href="" ng-click="vm.logout()" ui-sref-active="active"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+                    </ul>*@
+
+                @*<ul class="nav navbar-nav">
+                        <li ng-if="vm.showLogout()"><a href="" ui-sref="dashboard" ui-sref-active="active"><span class="fa fa-money"></span> Mis préstamos</a></li>
+                        <li ng-if="vm.showLogout()"><a href="" ui-sref="ActualizaDatos" ui-sref-active="active"><span class="fa fa-edit"></span> Actualizar datos</a></li>
+                        <li ng-if="vm.showLogout()"><a href="" ui-sref="tratamiento" ui-sref-active="active"><span class="fa fa-laptop"></span> Tratamiento de datos</a></li>
+                        <li ng-if="vm.showLogout()"><a href="" ui-sref="contrasenia" ui-sref-active="active"><span class="fa fa-key"></span> Cambio de contraseña</a></li>
+                    </ul>*@
+                @*<ul class="nav navbar-nav navbar-right">
+                        <li ng-if="!vm.showLogout() && !vm.showMenus()"><a href="" id="btn-como-pagar" ng-click="vm.callInicio()">Inicio</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="login" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="RegularizacionInterna" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Regularización Interna</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="Regularizacion" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Regularización</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="Autorizacion" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Autorización</a></li>
+                        <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="home" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> menu</a></li>
+                        <li ng-if="vm.showLogout()"><a class="btn-pastel" href="" ng-click="vm.logout()" ui-sref-active="active"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+                    </ul>*@
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-if="!vm.showLogout() && !vm.showMenus()"><a href="" id="btn-como-pagar" ng-click="vm.callInicio()">Inicio</a></li>
+                    <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="login" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesión</a></li>
+                    <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="RegularizacionInterna" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Regularización Interna</a></li>
+                    <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="Regularizacion" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Regularización</a></li>
+                    <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="Autorizacion" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> Autorización</a></li>
+                    <li ng-if="!vm.showLogout()"><a class="btn-pastel" ui-sref="home" ui-sref-active="active"><span class="glyphicon glyphicon-log-in"></span> menu</a></li>
+                    <li ng-if="vm.showLogout()"><a class="btn-pastel" href="" ng-click="vm.logout()" ui-sref-active="active"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @*<div class="content"> <div ui-view></div> </div>*@
+
+    @*<footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <h3 class="pie">
+                            <span>
+                                Planeamiento Comercial <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+511016157030"> </a>
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="col-md-3 col-sm-5">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="detalle">
+                            2018 - Todos los derechos reservados -
+                            <a href="#" target="_blank">Políticas de seguridad de Scotiabank</a>
+                             - <a href="#" target="_blank">Términos y condiciones</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>*@
+
+    <div class="container body-content">
+        {{datos}}
+        @RenderBody()
+        @*<div ui-view></div>*@
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    <div class="modal fade" id="modalCargaError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabelError"><i class="fa fa-clock-o"></i> Error</h4>
+            </div>
+            <div class="modal-body center-block">
+                <p id="modalCargandoTextoError"></p>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCarga" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h4 class="modal-title" id="myModalLabel"><i class="fa fa-clock-o"></i> Espere por favor</h4></div><div class="modal-body center-block"><p id="modalCargandoTexto"></p><div class="progress"><div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div></div></div></div></div>
+    <script src="~/app/Utils.js"></script>
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/app")
+    <script src="~/Scripts/lodash.min.js"></script>
+    <script src="~/Scripts/multiselect.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,264 @@
+﻿
+a:link {
+    color: #034af3;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #505abc;
+}
+
+a:hover {
+    color: #1d60ff;
+    text-decoration: none;
+}
+
+a:active {
+    color: #12eb87;
+}
+
+p, ul {
+    margin-bottom: 20px;
+    line-height: 1.6em;
+}
+
+/* ELEMENTOS DE DISEÑO PRIMARIO   
+----------------------------------------------------------*/
+
+/* puede especificar un porcentaje mayor o menor para el 
+ancho de página. O bien puede especificar un ancho de píxel exacto. */
+.page {
+    /*position: absolute;*/
+    /*left: 50%;*/
+    width: 100%;
+    height: 100%;
+    /*margin-left: -49.5%;*/
+    /*padding: 5px;*/
+}
+
+#header {
+    width: 100%;
+    margin-bottom: 0px;
+    color: #000;
+    padding: 5px;
+    float: left;
+}
+
+#main {
+    /*padding: 30px 30px 15px 30px;*/
+    background-color: #fff;
+    margin-bottom: 30px;
+    _height: 1px; /* solo IE6 aplica las propiedades de CSS con un carácter de subrayado inicial */
+    width: 100%;
+    float: left;
+}
+
+#footer {
+    color: #999;
+    padding: 10px 0;
+    text-align: center;
+    line-height: normal;
+    margin: 0;
+    font-size: .9em;
+    width: 100%;
+    float: left;
+}
+
+/* MENÚ TABULADOR   
+----------------------------------------------------------*/
+ul#menu {
+    border-bottom: 1px #5C87B2 solid;
+    padding: 0 0 2px;
+    position: relative;
+    margin: 0;
+    text-align: right;
+}
+
+    ul#menu li {
+        display: inline;
+        list-style: none;
+    }
+
+        ul#menu li#greeting {
+            padding: 10px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            line-height: 2.8em;
+            color: #fff;
+        }
+
+        ul#menu li a {
+            padding: 10px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            line-height: 2.8em;
+            background-color: #e8eef4;
+            color: #034af3;
+        }
+
+            ul#menu li a:hover {
+                background-color: #fff;
+                text-decoration: none;
+            }
+
+            ul#menu li a:active {
+                background-color: #a6e2a6;
+                text-decoration: none;
+            }
+
+        ul#menu li.selected a {
+            background-color: #fff;
+            color: #000;
+        }
+
+/* ELEMENTOS DE DISEÑO DE FORMULARIOS  
+----------------------------------------------------------*/
+
+fieldset {
+    margin: 1em 0;
+    padding: 1em;
+    border: 1px solid #CCC;
+}
+
+    fieldset p {
+        margin: 2px 12px 10px 10px;
+    }
+
+legend {
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input[type="text"] {
+    width: 200px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    padding:3px;
+}
+
+input[type="password"] {
+    width: 200px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    padding:3px;
+}
+
+select {
+    width: 200px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    padding:3px;
+}
+/* TABLA
+----------------------------------------------------------*/
+
+table {
+    border-collapse: collapse;
+}
+
+    table td {
+        padding: 5px;
+    }
+    
+    table th {
+        padding: 6px 5px;
+        text-align: left;
+        background-color: #e8eef4;
+    }
+
+/* VARIOS  
+----------------------------------------------------------*/
+.clear {
+    clear: both;
+}
+
+.error {
+    color: Red;
+}
+
+#menucontainer {
+    margin-top: 40px;
+}
+
+div#title {
+    display: block;
+    float: left;
+    text-align: left;
+}
+
+#logindisplay {
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    margin: 10px;
+    color: White;
+}
+
+    #logindisplay a:link {
+        color: white;
+        text-decoration: underline;
+    }
+
+    #logindisplay a:visited {
+        color: white;
+        text-decoration: underline;
+    }
+
+    #logindisplay a:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+/* Estilos para aplicaciones auxiliares de validación
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* Estilos para aplicaciones auxiliares de editor y visualización
+----------------------------------------------------------*/
+.display-label, .editor-label, .display-field, .editor-field {
+    margin: 0.5em 0;
+}
+
+.text-box {
+    width: 30em;
+}
+
+    .text-box.multi-line {
+        height: 6.5em;
+    }
+
+.tri-state {
+    width: 6em;
+}
+.se-pre-con {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 10003;
+    /*background: url(http://www.internetymidinero.com/imagenes/Cargando.gif) center no-repeat rgba(255,255,255,0.85);*/
+    /*background: url(../Content/assets/img/Cargando.gif) center no-repeat rgba(255,255,255,0.85);*/
+    background: url('../images/Cargando.gif') center no-repeat rgba(255,255,255,0.85);
+}

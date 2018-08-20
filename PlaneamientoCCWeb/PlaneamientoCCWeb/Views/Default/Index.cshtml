@@ -1,0 +1,98 @@
+﻿@*<!DOCTYPE html>
+<html ng-app="appReferidos">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Aplicación Sirena</title>
+
+    <link href="~/Content/sweet-alert.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/smain.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <link href="~/Content/loading-bar.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-General/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/angular/angular.min.js"></script>
+    <script src="~/Scripts/angular/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script src="~/Scripts/angular-sweetalert/sweet-alert.min.js"></script>
+    <script src="~/Scripts/jquery-General/jquery-general.js"></script>
+    <script src="~/Scripts/jquery-General/jquery-ui.js"></script>
+    <script src="~/app/app.js"></script>
+
+</head>
+@{
+    ViewBag.Title = "Aplicación Scotiabank";
+}
+
+<body class="wrapper" ng-controller="applicationController as vm" ng-init="init('@System.Configuration.ConfigurationManager.AppSettings["WebApiUrl"]')" onselectstart="return false;" ondragstart="return false;">
+    <style>
+        #texto-version {
+            font-size: 10px;
+            text-align: right;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+            #texto-version:hover {
+                color: white;
+            }
+    </style>
+
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="" ng-click="vm.callInicio()" id="texto-version">
+                    <img src="~/Images/Scotiabank.gif" />
+                    v. @ViewContext.Controller.GetType().Assembly.GetName().Version
+                </a>
+            </div>
+            <div class="collapse navbar-collapse menuCOMFFVV" id="bs-example-navbar-collapse-1">
+
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li><a href="@Href("~/Regularizacion/Index")">Regularizar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container body-content">
+
+        @RenderBody()
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+    <div class="modal fade" id="modalCargaError" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabelError"><i class="fa fa-clock-o"></i> Error</h4>
+            </div>
+            <div class="modal-body center-block">
+                <p id="modalCargandoTextoError"></p>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCarga" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h4 class="modal-title" id="myModalLabel"><i class="fa fa-clock-o"></i> Espere por favor</h4></div><div class="modal-body center-block"><p id="modalCargandoTexto"></p><div class="progress"><div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div></div></div></div></div>
+    <script src="~/app/Utils.js"></script>
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/app")
+    <script src="~/Scripts/lodash.min.js"></script>
+    <script src="~/Scripts/multiselect.js"></script>
+
+
+</body>
+</html>*@
+
+

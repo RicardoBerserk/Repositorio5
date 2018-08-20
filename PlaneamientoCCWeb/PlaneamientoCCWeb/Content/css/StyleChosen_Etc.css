@@ -1,0 +1,37 @@
+﻿.chosen-etc {
+    height: auto;
+}
+
+    .chosen-etc * {
+        width: 100%;
+        float: left;
+    }
+
+    .chosen-etc > div {
+        height: auto;
+    }
+
+        .chosen-etc > div > ul {
+            list-style: none;
+            margin-left: 0;
+            padding: 0;
+            border: 1px solid #cccccc;
+            margin-top: -1px;
+            width: 100%;
+            max-height: 350px;
+            overflow-y: scroll;
+        }
+
+            .chosen-etc > div > ul > li {
+                margin-left: 0;
+                width: 100%;
+                float: left;
+                cursor: pointer;
+                font-family: arial, TimeNewRoman, 'Helvetica';
+                font-size: 12px;
+            }
+
+                .chosen-etc > div > ul > li:hover {
+                    background: #cccccc;
+                    color: #000;
+                }

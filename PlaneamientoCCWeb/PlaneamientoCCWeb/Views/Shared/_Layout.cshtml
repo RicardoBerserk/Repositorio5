@@ -1,0 +1,215 @@
+﻿
+
+<!DOCTYPE html>
+<html ng-app="appReferidos" style="height: 100%;">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store,must-revalidate, proxy-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>..::Apolo::..</title>
+    <link href="~/Content/EstiloScotiabank/Site.css" rel="stylesheet" />
+    <link href="~/Content/EstiloScotiabank/Styles.css" rel="stylesheet" />
+    <link href="~/Content/EstiloScotiabank/sweet-alert.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap/bootstrap1.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />*@
+
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/styleCustom.css" rel="stylesheet" />
+    
+   
+    <script src="~/Scripts/jquery-General/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/angular/angular.min.js"></script>
+    <script src="~/Scripts/angular/angular-route.min.js"></script>
+    <script src="~/Content/bootstrap/bootstrap.js"></script>
+    <script src="~/Content/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script src="~/Scripts/angular-sweetalert/sweet-alert.min.js"></script>
+    <script src="~/Scripts/jquery-General/jquery-general.js"></script>
+    <script src="~/Scripts/jquery-General/jquery-ui.js"></script>
+    <script src="~/Scripts/angular/loading-bar.min.js"></script>
+    <script src="~/Scripts/angular/customSelect.js"></script>
+
+    <script src="~/app/app.js"></script>
+    <script src="~/app/app.controller.js"></script>
+
+    <script src="~/app/shared/data.service.js"></script>
+    <script src="~/app/shared/configuration.service.js"></script>
+    <script src="~/app/shared/authentication.service.js"></script>
+
+    <script>
+        function getAbsolutePath()
+        {
+            var i = "@Html.Raw(PageBase.getPathGLobal())";
+            var loc = window.location;
+            var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+            if (i == "0") {
+                return loc.origin + '/';
+            } else {
+                return loc.origin + _DirVirtual;
+            }
+        }
+    </script>
+
+</head>
+
+<body ng-controller="applicationController as vm" ng-init="vm.cargarInit('@System.Configuration.ConfigurationManager.AppSettings["WebApiUrl"]')">
+
+    @*<div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="" ng-click="vm.callInicio()" id="texto-version">
+                        <img src="~/Images/Scotiabank.gif" />
+                        v. @ViewContext.Controller.GetType().Assembly.GetName().Version
+                    </a>
+
+                </div>
+                <div class="collapse navbar-collapse menuCOMFFVV" id="bs-example-navbar-collapse-1">
+                    <link href="~/Content/extra/smain.css" rel="stylesheet" />
+                    <div class="cls-menu-cont" id="dvMenuPrincipal">
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>*@
+
+    <div class="container">
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="collapse navbar-collapse menuCOMFFVV" id="bs-example-navbar-collapse-1">
+                    <link href="~/Content/extra/smain.css" rel="stylesheet" />
+                    <div class="cls-menu-cont" id="dvMenuPrincipal">
+                    </div>
+                </div>
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" class="navbar-brand">Brand</a>
+                </div>
+
+                <!-- Collection of nav links and other content for toggling -->
+                @*<div id="navbarCollapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Messages</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Login</a></li>
+                    </ul>
+                </div>*@
+            </div>
+        </nav>
+
+    </div>
+
+    <div class="topnav" id="myTopnav">
+        <a href="#home" class="active">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <div class="dropdown">
+            <button class="dropbtn">
+                Dropdown
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+        <a href="#about">About</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            @RenderBody()
+        </div>
+    </div>
+
+    @*<div class="page">
+        <div id="header" class="cls-header">
+            <div id="title" class="cls-titulo">
+                <table cellpadding="0" cellspacing="0" style="width: 60%; float: left">
+                    <tbody>
+                        <tr>
+                            <td style="width: 10px">
+                                <img src="~/Content/images/Logo-GeneSys.png" align="baseline" style="border-width: 0px; width: 100px; height: 45px;" />
+                            </td>
+                            <td style="width: 740px; text-align: left; font-size: 18px" class="lbl-titulo">
+                                | <span style="color: #D8CA17">Credi</span>Scotia&nbsp;
+                            </td>
+                            <td align="right" style="width: 50px">
+                                <span id="lblFecha"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="cls-titulo-dere">
+                    <div class="triangulo-equilatero-bottom-left">
+                        <div style="position: absolute; margin-top: 22px; margin-left: 39%; left: 25%;">
+                            @{if (!string.IsNullOrEmpty(PageBase.getNombreUsuario()))
+                            {
+                                <button type="button" style="border: none; background: transparent; color: #fff; font-size: 12px; font-weight: bold;" onclick="CerrarSesion();">Cerrar Sesión</button>
+                                <label>|</label>
+                                <label>Bienvenido:</label>
+                                <label>@PageBase.getNombreUsuario()</label>
+                            }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <link href="~/Content/css/Style-navegador.css" rel="stylesheet" />
+            <div class="cls-menu-cont" id="dvMenuPrincipal">
+            </div>
+        </div>
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>*@
+
+    @RenderSection("scripts", required: false)
+
+
+    <script>
+        var dt = new Date();
+        var month = dt.getMonth() + 1;
+        var day = dt.getDate();
+        var year = dt.getFullYear();
+        //document.getElementById("lblFecha").innerHTML = (day < 10 ? '0' : '') + day + '/' + (month < 10 ? '0' : '') + month + '/' + year;
+
+        var cadenaMenu = "@Html.Raw(PageBase.getEstructOpciones())";
+        document.getElementById("dvMenuPrincipal").innerHTML = cadenaMenu;
+
+        window.CerrarSesion = function ()
+        {
+            var xmlhttp = new XMLHttpRequest();
+            var url = getAbsolutePath() + "Seguridad/CerrarSesion";
+            xmlhttp.open("POST", url, true, "", "");
+            xmlhttp.setRequestHeader("Content-Type", "application/json");
+            xmlhttp.setRequestHeader("accept", "application/json");
+            var payload = { respuesta: "" };
+            xmlhttp.send(JSON.stringify(payload));
+            xmlhttp.onreadystatechange = function ()
+            {
+                if (xmlhttp.readyState === 4) {
+                    document.execCommand('ClearAuthenticationCache');
+                    window.location.href = JSON.parse(xmlhttp.response).link;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

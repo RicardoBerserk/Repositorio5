@@ -1,0 +1,15 @@
+﻿.form-horizontal input.ng-invalid {
+    background-color: pink;
+}
+
+.form-horizontal input.ng-valid {
+    background-color: lightgreen;
+}
+
+#formularioCanal input.ng-invalid {
+    background-color: red;
+}
+
+#formularioCanal input.ng-valid {
+    background-color: lightgreen;
+}

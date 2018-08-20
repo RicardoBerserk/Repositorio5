@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Inicio Plataforma Integral de Canales";
+    string CurrentName = Convert.ToString(PageBase.getVista());
+    if (CurrentName.Equals("ON"))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    }
+
+}
+
+<div ng-controller="applicationController" id="applicationController">
+    <div data-ng-view="">
+    </div>
+    <div style="margin: auto; width: 1200px;">
+        <div ng-model="dvPlantilla" id="dvPlantilla" style="width: 100%; float: left; height: auto">
+        </div>
+        <div style="float: left; width: 100%; display: none">
+            <img style="width: 100%; margin-top: 25%; filter: alpha(opacity=90); opacity: .90;" src="~/Content/images/Logo-GeneSys.png" />
+        </div>
+    </div>
+</div>
+
+<script src="~/app/inicia.controller.js"></script>
+
+@*<script src="~/app/Configurar/InicioControlador.js"></script>
+<script src="~/app/Mantenimiento/Informar/InformarServicio.js"></script>*@

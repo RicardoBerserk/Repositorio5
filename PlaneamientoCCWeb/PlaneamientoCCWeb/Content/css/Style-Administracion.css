@@ -1,0 +1,250 @@
+﻿.ul-tab {
+    list-style: none;
+    float: left;
+    margin-left: -52px;
+}
+
+.cls-dv-prin {
+    float: left;
+    width: 100%;
+    min-height: 330px;
+    height: auto;
+    border: 1px solid #c0c0c0;
+    margin-left: -11px;
+    margin-top: -9px;
+}
+
+.li-tab-opt {
+    float: left;
+    list-style: none;
+    display: block;
+    background: #666666;
+    color: #fff;
+    padding: 5px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin-right: 2px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+    .li-tab-opt:hover {
+        background: #ada2a2;
+    }
+
+.cls-div-opt {
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+.cls-orden {
+    display: none;
+}
+
+.cls-div-detail {
+    float: left;
+    width: 100%;
+    height: auto;
+    margin-bottom: 7px;
+    font-size: 12px !important;
+}
+
+    .cls-div-detail * {
+        font-size: 12px !important;
+        font-weight: normal;
+    }
+
+    .cls-div-detail input[type=text] {
+        width: 80px !important;
+    }
+
+.cls-fieldset {
+    width: 95%;
+    margin: auto;
+    margin-bottom: 5px;
+    border: 1px solid #c0c0c0;
+    padding: 5px;
+}
+
+    .cls-fieldset > legend {
+        width: auto;
+        padding: 0px;
+        margin-bottom: 0px;
+        color: #333;
+        border-bottom: none;
+    }
+
+
+
+
+.tabla-admin-Popup {
+    width: 100%;
+    height: auto;
+    /*border: 1px solid #c0c0c0;*/
+    /*margin-top: 5px;
+    margin-left:5px;*/
+    margin: 5px;
+}
+
+.th-cabeceras {
+    background:  #666666 !important;
+}
+
+
+.div-admin-tabla {
+    margin-top: 9px; 
+    border-right: 1px solid #DEDFDE;
+    border-left: 1px solid #DEDFDE;
+}
+
+.ul-tab {
+            list-style: none;
+            float: left;
+            margin-left: -52px;
+        }
+
+        .cls-dv-prin {
+            float: left;
+            width: 100%;
+            height: auto;
+            min-height: 330px;
+            border: 1px solid #c0c0c0;
+            margin-left: -11px;
+            margin-top: -9px;
+        }
+
+        .li-tab-opt {
+            float: left;
+            list-style: none;
+            display: block;
+            background: #666666;
+            color: #fff;
+            padding: 5px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            margin-right: 2px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+            .li-tab-opt:hover {
+                background: #ada2a2;
+            }
+
+        .cls-div-opt {
+            float: left;
+            width: 100%;
+            height: auto;
+        }
+
+        .cls-orden {
+            display: none;
+        }
+
+        .cls-div-detail {
+            float: left;
+            width: 100%;
+            height: auto;
+            margin-bottom: 7px;
+            font-size: 12px !important;
+        }
+
+            .cls-div-detail * {
+                font-size: 12px !important;
+                font-weight: normal;
+            }
+
+            .cls-div-detail input[type=text] {
+                width: 80px !important;
+            }
+
+        .cls-fieldset {
+            width: 95%;
+            margin: auto;
+            margin-bottom: 5px;
+            border: 1px solid #c0c0c0;
+            padding: 5px;
+        }
+
+            .cls-fieldset > legend {
+                width: auto;
+                padding: 0px;
+                margin-bottom: 0px;
+                color: #333;
+                border-bottom: none;
+            }
+
+        .cls-row-empty:hover {
+            background: #fff !important;
+        }
+
+ .cls_contenedor_detalle :hover {
+            background-color: transparent !important;
+        }
+
+        .sp-btn-page {
+            cursor: pointer;
+            display: block;
+            width: 20px;
+            float: left;
+            border: 1px solid #878787;
+            color: #878787;
+            text-align: center;
+            padding: 3px;
+            font-weight: bold;
+        }
+
+        .sp-btn-sbr {
+            border-right: none !important;
+        }
+
+        .sp-btn-sbl {
+            border-left: none !important;
+        }
+
+        .sp-btn-count {
+            cursor: pointer;
+            display: block;
+            width: 20px;
+            float: left;
+            text-align: center;
+            padding: 3px;
+            color: #fff;
+            cursor: default;
+            background-color: #337ab7;
+            border: 1px solid #337ab7;
+            font-weight: bold;
+        }
+
+
+.red {
+    color: red; 
+}
+
+.black {
+    color: black;
+}
+.green {
+    color: green;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

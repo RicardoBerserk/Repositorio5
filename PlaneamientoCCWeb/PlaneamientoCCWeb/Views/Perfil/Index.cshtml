@@ -1,0 +1,162 @@
+﻿<div>
+    <div ng-controller="puestoController as vm" class="ancho-ctrl" id="controladorPerfil">
+        {{ error }}
+        <br />
+        <section class="div-contenedor">
+            <div id="titulo" class="ancho-ctrl lbl-titulo">
+                {{ Titulo }}
+            </div>
+        </section>
+
+        <div id="cabecera" class="ancho-ctrl">
+            <fieldset style="padding: 1em">
+                <div class="alto-ctrl" style="width: 90%">
+                    <table>
+
+                        <tr>
+                            <td>
+                                Descripción:
+                            </td>
+                            <td>
+                                <input type="text" ng-model="bDescripcion" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="alto-ctrl" style="width: 10%">
+                    <button ng-attr-type="button" ng-click="Buscar()" id="btnBuscar" class="btn-filtros">
+                        Buscar
+                    </button>
+                    <button ng-attr-type="button" ng-click="Nuevo()" id="btnNuevo" class="btn-filtros">
+                        Nuevo
+                    </button>
+                    <button ng-attr-type="button" ng-click="Limpiar();" id="btnLimpiar" class="btn-filtros">
+                        Limpiar
+                    </button>
+                </div>
+            </fieldset>
+        </div>
+
+        <div id="cuerpo" class="ancho-ctrl">
+
+            <section class="cp-bandeja">
+                <header class="dv-titulo">
+                    <div class="dv-titulo-opt">
+                        <img src="~/Content/images/btn1.png" class="dv-opt-max" onclick="fcMaximizar(1)" style="display: none" />
+                        <img src="~/Content/images/btn2.png" class="dv-opt-min" onclick="fcMaximizar(0)" />
+                    </div>
+                    <div class="dv-titulo-opt dv-titulo-opt-alinea">
+                        <img src="~/Content/images/btn_info.png" style="width: 20px; height: 20px" />
+                        &nbsp;
+                        <label class="lbl-con-reg" style="display: initial">
+                            Se encontraron
+                            <label>{{contador}}</label>
+                            registros
+                        </label>
+                    </div>
+                    <div class="dv-titulo-opt dv-titulo-opt-alinea">
+                        <img src="~/Content/images/excel_icon.png" style="width: 20px; height: 20px; margin-right: 50px;" ng-click="GenerarReporteExporta('EXCEL')" />
+                        <img src="~/Content/images/pdf_icon.png" style="width: 20px; height: 20px;" ng-click="GenerarReporteExporta('PDF')" />
+                    </div>
+                </header>
+                <article class="dv-contenedor dv-expandir">
+                    <div class="dv-subcontenedor">
+
+                        <select ng-model="itemsPerPage" ng-change="setItemsPerPage(itemsPerPage)">
+                            <option>10</option>
+                            <option>15</option>
+                            <option>25</option>
+                            <option>50</option>
+                        </select>
+                        registros
+
+                        <table class="ancho-ctrl css-bandeja">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="border: 1px solid #DEDFDE;" class="ico-celda">
+                                        Edit.
+                                    </th>
+                                    <th scope="col" style="border: 1px solid #DEDFDE;" class="ico-celda">
+                                        Elim.
+                                    </th>
+                                    <th>
+                                        Perfil
+                                    </th>
+                                    <th style='text-align:center'>Estado </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in ListaPerfiles">
+                                    <td class="ico-celda">
+                                        <img alt='' ng-click="Editar(item)" src='~/Content/images/btn_edit.png'
+                                             style='border-width: 0px; cursor: pointer' />
+                                    </td>
+                                    <td class="ico-celda">
+                                        <img alt='' ng-click="Eliminar(item)" src='~/Content/images/btn_delete.png'
+                                             style='border-width: 0px; cursor: pointer' />
+                                    </td>
+                                    <td>
+                                        {{item.DescPerfil}}
+                                    </td>
+                                    <td style='text-align:center'>
+                                        {{item.EstadoPerfil}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="dataTables_info" id="dataTables-example_info">
+                                    Página actual: {{currentPage}} / {{numPages}}
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                                    <pagination total-items="totalPaginas" first-text="<<" previous-text="<" next-text=">" last-text=">>" num-pages="noOfPages" ng-model="currentPage" max-size="CantidadMaxima" ng-change="pageChanged()" class="pagination-sm" boundary-links="true"></pagination>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+            </section>
+
+        </div>
+
+        <div id="dialog-form-Perfil" title="Administrador de Perfiles" style="display: none;">
+            @*<input type="hidden" ng-model="Perfil.IDPerfil" id="IDPerfil" name="nIDPerfil" />*@
+            <table>
+                <tr>
+                    <td align="left">
+                        Código Perfil:
+                    </td>
+                    <td>
+                        <input type="text" ng-model="Perfil.IDPerfil" id="IDPerfil" name="nIDPerfil" style="width: 200px" ng-disabled="disabledCodPerfil" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        Descripción Perfil:
+                    </td>
+                    <td>
+                        <input type="text" ng-model="Perfil.DescPerfil" style="width: 200px" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="dialog-cargando">
+    </div>
+</div>
+<script src="~/app/private/Puesto/puesto.controller.js"></script>
+
+
+<script>
+    $(".cls-solonumero").keydown(function (evt) { fc_Solonumeros(evt) });
+</script>
+
+
+

@@ -1,0 +1,383 @@
+﻿<div class="bg" ng-controller="regularizacionController as vm">
+    <div class="container contenido-nuevo tabla">
+        <div class="clearfix"></div>
+        <div class="usuario-bienvenida">
+            <div class="welcome">
+                <h3>Regularización</h3>
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div id="Idregularizar">
+                <form name="frmConsultar" class="form-horizontal" role="form" novalidate ng-submit="vm.BuscarOperaciones(frmConsultar.$valid)">
+                    <!--<form class="form-standar" role="form">-->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group" ng-class="{'has-error has-feedback' : frmConsultar.ProductoM.$invalid && frmConsultar.$submitted}">
+                                <label class="col-sm-4 control-label">Tipo Producto: <span class="ast">*</span></label>
+                                <div class="col-sm-8">
+                                    <select ng-model="vm.Regularizar.tablaTipoSeleccionado" id="cmbProducto" name="ProductoM" class="form-control" ng-change="vm.ModuloSeleccionado(vm.Regularizar.tablaTipoSeleccionado)" required>
+                                        <option value="">--Seleccione--</option>
+                                        <option ng-repeat="tipo in vm.ModuloList" ng-selected="{{item==tablaTipoSeleccionado}}" value="{{tipo}}">{{tipo.nombreModulo}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Módulo:* </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" disabled="disabled" ng-model="vm.Regularizar.moduloConsulta" placeholder="Ingrese modulo" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Cuenta BT:* </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" ng-model="vm.Regularizar.cuentaConsulta" placeholder="Ingrese cuenta BT" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nro. Operación:* </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" ng-model="vm.Regularizar.operacionConsulta" placeholder="Ingrese nro. Operación" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nro. Suboperación:* </label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" ng-model="vm.Regularizar.subOperacionConsulta" placeholder="Ingrese nro. Suboperación" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <div class="form-group">
+                                <button type="submit" class="btn blue-dark"> Buscar</button>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-2">
+                            <div class="form-group">
+                                <button type="button" class="btn blue-dark" ng-click="vm.CargarBusqueda()"> Limpiarrrr</button>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-1 col-md-2">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Colocaciones">
+                                    <span class="fa fa-plus"></span> Agregar Colocación
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class=" col-md-13">
+                            <div class="dataTables_length" id="sample_1_length">
+                                <label>
+                                    <select name="sample_1_length" aria-controls="sample_1" class="form-control input-xsmall input-inline"
+                                            ng-model="vm.Regularizar.cantidadRegistros" ng-selected="vm.Regularizar.cantidadRegistros" ng-change="vm.PageChaged()">
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    registros
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover" id="tablaRegularizar">
+                            <thead>
+                                <tr class="principal">
+                                    <td class="text-center">Seleccionar</td>
+                                    <th class="text-center">Fecha </th>
+                                    <th class="text-center">Cuenta BT</th>
+                                    <th class="text-center">Operación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="coloc in vm.ModuloLista" ng-click="vm.resetAll2(coloc)" ng-class="{'success':coloc.seleccionado}">
+                                    <td class="data-centrada">
+                                        <input type="radio" name="radio-primary" ng-value="true" ng-model="coloc.seleccionado" ng-checked="coloc.seleccionado" />
+                                    </td>
+                                    <td class="text-center">{{coloc.codigoModulo}}</td>
+                                    <td class="text-center">{{coloc.nombreModulo}}</td>
+                                    <td class="text-center">{{coloc.valor}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center" colspan="12">
+                                        <div class="pull-right">
+                                            <pagination total-items="vm.Regularizar.totalCount" ng-change="vm.PageChaged()" items-per-page="vm.Regularizar.cantidadRegistros" first-text="<<" previous-text="<" next-text=">" last-text=">>" direction-links="true" ng-model="vm.Regularizar.paginaActual" max-size="1" class="pagination" boundary-links="true" num-pages="numPages"></pagination>
+                                            <a class="btn btn-primary">Page: {{vm.Regularizar.paginaActual}} / {{numPages}}</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <!--<table class="table table-striped table-bordered table-hover" id="tablaRegularizar">
+                            <thead>
+                                <tr class="principal">
+                                    <td class="text-center">Seleccionar</td>
+                                    <th class="text-center">Fecha </th>
+                                    <th class="text-center">Cuenta BT</th>
+                                    <th class="text-center">Operación</th>
+                                    <th class="text-center">Sub Operación</th>
+                                    <th class="text-center">Módulo</th>
+                                    <th class="text-center">CDR Vendedor</th>
+                                    <th class="text-center">CDR Operación</th>
+                                    <th class="text-center">Código de FDN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="coloc in vm.Colocaciones" ng-click="vm.resetAll(coloc)" ng-class="{'success':coloc.seleccionado}">
+                                    <td class="data-centrada">
+                                        <input type="radio" name="radio-primary" ng-value="true" ng-model="coloc.seleccionado" ng-checked="coloc.seleccionado" />
+                                    </td>
+                                    <td class="text-center">{{coloc.fecha}}</td>
+                                    <td class="text-center">{{coloc.cuentaBT}}</td>
+                                    <td class="text-center">{{coloc.operacion}}</td>
+                                    <td class="text-center">{{coloc.subOperacion}}</td>
+                                    <td class="text-center">{{coloc.modulo}}</td>
+                                    <td class="text-center">{{coloc.sucursalVend}}</td>
+                                    <td class="text-center">
+                                        {{coloc.sucursalOpe}}
+                                    </td>
+                                    <td class="text-center">{{coloc.codigoVendedorCol}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td align="center" colspan="12">
+                                        <div class="pull-right">
+                                            <pagination total-items="vm.Regularizar.totalCount" ng-change="vm.PageChaged()" items-per-page="vm.Regularizar.cantidadRegistros" first-text="<<" previous-text="<" next-text=">" last-text=">>" direction-links="true" ng-model="vm.Regularizar.paginaActual" max-size="1" class="pagination" boundary-links="true" num-pages="numPages"></pagination>
+                                            <a class="btn btn-primary">Page: {{vm.Regularizar.paginaActual}} / {{numPages}}</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <form name="frmTest" class="form-horizontal" role="form" novalidate ng-submit="vm.guardarModulo(frmTest.$valid)">
+                <div class="row">
+                    <div class="col-md-offset-6 col-md-3">
+                        <p>
+                            <button type="submit" id="GUARDARcolo" class="btn btn-solicitar btn-block">
+                                <span class="fa fa-save"></span> Sol. Regularización
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="idCambio">
+            <form name="frmSolicitud" class="form-horizontal" role="form" novalidate ng-submit="vm.SolicitarRegularizacion(frmSolicitud.$valid)">
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-6">
+                        <div class="form-group" ng-class="{'has-error has-feedback' : vm.Regularizar.validaCDR }">
+                            <div class="checkbox">
+                                <input type="checkbox" id="idCheckCdr" name="" ng-disabled="vm.desahabilitado" ng-click="vm.habilitarCDR()" ng-checked="vm.desahabilitadoA">
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input ng-model="vm.Regularizar.label1" id="txtLabelCDR" name="txtLabelCDR2" disabled="disabled" placeholder="Modificar CDR" type="text" class="form-control" value="Modificar CDR" autocomplete="off">
+                                        <span class="input-group-addon">-</span>
+                                        <input ng-model="vm.Regularizar.sucursal" ng-disabled="vm.desahabilitadoCDR" id="idSucursal" name="Sucursal" type="text" class="form-control" autocomplete="off" onkeypress="return SoloNumerosInputs(event)" ng-required="vm.Regularizar.validaCDR">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-offset-1  col-sm-6">
+                        <div class="form-group" ng-class="{'has-error has-feedback' : vm.Regularizar.validaFDN }">
+                            <div class="checkbox">
+                                <input type="checkbox" id="idCheckCdr" name="" ng-disabled="vm.desahabilitado" ng-click="vm.habilitarFDN()" ng-checked="vm.desahabilitadoB">
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <input ng-model="vm.Regularizar.label2" id="txtLabelVendedor" name="txtLabelVendedor2" disabled="disabled" placeholder="Modificar FDN" value="Modificar FDN" type="text" class="form-control" autocomplete="off">
+                                        <span class="input-group-addon">-</span>
+                                        <input ng-model="vm.Regularizar.vendedor" ng-disabled="vm.desahabilitadoFDN" id="idVendedor" name="Vendedor" type="text" class="form-control" autocomplete="off" onkeypress="return SoloNumerosInputs(event)" ng-required="vm.Regularizar.campoFDN">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group" ng-class="{'has-error has-feedback' : frmSolicitud.correoInicio.$invalid && frmSolicitud.$submitted }">
+                            <label class="col-sm-4 control-label">Correo Electronico Gerente A <span class="ast">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="txtCorreoGerenteA" name="correoInicio" ng-model="vm.Regularizar.correoGerenteA" ng-disabled="vm.habilitadoCorreoGerenteA" placeholder="flor.anicana@scotiabank.com.pe" ng-required="vm.Regularizar.validaCorreoCDR">
+                                <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="frmSolicitud.correoInicio.$invalid && frmSolicitud.$submitted"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn blue-dark" ng-click="vm.VerificarGerenteInicio()"> Verificar A</button>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group" ng-class="{'has-error has-feedback' : frmSolicitud.correoFin.$invalid && frmSolicitud.$submitted }">
+                            <label class="col-sm-4 control-label">Correo Electronico Gerente B <span class="ast">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="text"   class="form-control" id="txtCorreoGerenteB" name="correoFin" ng-model="vm.Regularizar.correoGerenteB" ng-disabled="vm.habilitadoCorreoGerenteB" placeholder="vegeta.principe@scotiabank.com.pe" ng-required="vm.Regularizar.validaCorreoFDN">
+                                <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="frmSolicitud.correoFin.$invalid && frmSolicitud.$submitted"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="col-md-4">
+                        <div class="form-group">
+                            <button type="button" class="btn blue-dark" ng-click="vm.VerificarGerenteFinal()"> Verificar B</button>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group" ng-class="{'has-error has-feedback' : frmSolicitud.correoCC.$invalid && frmSolicitud.$submitted }">
+                            <label class="control-label col-md-4">Correo Electronico Funcionario: </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="txtCorreoFuncionario" name="correoCC" ng-model="vm.Regularizar.correoFuncionario"  placeholder="bernith.cahuana@scotiabank.com.pe" required>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="frmSolicitud.correoCC.$invalid && frmSolicitud.$submitted"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-6 col-md-3">
+                        <p>
+                            <button type="submit" id="btnLugarEmpleoRegistroPersona" class="btn btn-solicitar btn-block">
+                                <span class="fa fa-save"></span> Sol. Regularización
+                            </button>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error has-feedback' : frmSolicitud.observacion.$invalid && frmSolicitud.$submitted }">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-4">Comentarios:</label>
+                                <textarea cols="160" rows="6" ng-model="vm.Regularizar.observacion" id="idTextAreaComentario" onkeypress="return SoloLetrasInputs(event)" name="observacion" required></textarea>
+                                <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="frmSolicitud.observacion.$invalid && frmSolicitud.$submitted"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+    <div id="Colocaciones" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Agregar Colocaciones</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" novalidate role="form" name="frmColocaciones"
+                          novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Empresa:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtEmpresa" autofocus autocomplete="off" required maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Vendedor:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtVendedor" autofocus autocomplete="off" required maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">CuentaBT:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtCuentaBTCol" autofocus autocomplete="off" required maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Operación:</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="txtOperacionCol" autofocus autocomplete="off" required maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-6 col-md-3">
+                                <p>
+                                    <button class="btn btn-danger btn-block" type="button" ng-click="vm.cancelaModal()">
+                                        <span class="fa fa-arrow-circle-left "></span> Cerrar
+                                    </button>
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>
+                                    <button class="btn btn-primary btn-block" type="submit">
+                                        <span class="fa fa-save"></span> Registrar
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $(this).scrollTop(0);
+    });
+
+    $(document).on('click', '.navbar-collapse.in', function (e) { if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') { $(this).collapse('hide'); } });
+</script>

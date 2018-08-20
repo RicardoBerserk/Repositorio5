@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store,must-revalidate, proxy-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Aplicaciòn Apolo</title>
+
+
+    @*<link href="~/Content/css/smain.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/extra/style.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-General/jquery-1.10.2.js"></script>
+    <script src="~/Content/bootstrap/bootstrap.js"></script>*@
+    <link href="~/Content/EstiloScotiabank/StyleLogin.css" rel="stylesheet" />
+    <script src="~/Scripts/angular/angular.min.js"></script>
+    <script src="~/Scripts/angular/angular-route.min.js"></script>
+    <script src="~/app/app.js"></script>
+
+</head>
+<body onload="disabledBack()">
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <div class="box">
+        <h2>Acceso</h2>
+        <form action="" id="frmPrincipal">
+            <div class="login-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Usuario" autocomplete="off">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Contraseña">
+            </div>
+            <button type="button" id="submit" onclick="AccederSistema();">Aceptar</button>
+        </form>
+        <label id="aviso" style="position: relative; left: 0px; color: red; font-weight: bold;"></label>
+    </div>
+
+    @*<div class="login">
+        <div class="cowboy">
+            <div class="objeto-login">
+                <div class="login-contenedor">
+                    <ul class="nav nav-tabs hide" id="tabs">
+                        <li class="active"><a data-toggle="tab" data-target="#iniciarSesion" href=""></a></li>
+                        <li class="disabled"><a data-toggle="tab" data-target="#olvidasteContrasena" href=""></a></li>
+                        <li class="disabled"><a data-toggle="tab" data-target="#olvidasteConfirmacion" href=""></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="iniciarSesion" class="tab-pane fade in active">
+                            <h2 class="title-login">Inicio de sesión</h2>
+                            <form class="login-form" method="post" name="frmLogin" role='form' novalidate ng-submit="vm.singIn(frmLogin.$valid)">
+                                <div class="form-group">
+                                    <input type="email" required="required" autocomplete="off" placeholder="Correo electrónico Corporativo" autofocus ng-model="vm.user.userName">
+                                    <input type="password" required="required" autocomplete="off" placeholder="Contraseña" ng-model="vm.user.password">
+                                </div>
+                                <div class="form-down">
+                                    <button type="button" id="submit" onclick="AccederSistema();">Aceptar</button>
+                                    <a id="forgot-password" class="forgot-password">Olvidaste la contraseña?</a>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>*@
+
+
+
+        <script src="~/Scripts/jquery-General/jquery.min.js"></script>
+        <script src="~/Scripts/jquery-General/jquery-general.js"></script>
+        <script>
+            function getAbsolutePath()
+            {
+                var i = "@Html.Raw(PageBase.getPathGLobal())";
+                var loc = window.location;
+                var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
+                if (i == "0") {
+                    return loc.origin + '/';
+                } else {
+                    return loc.origin + _DirVirtual;
+                }
+            }
+        </script>
+        <script>
+            $("#password").keypress(function (e)
+            {
+                if (e.keyCode == 13) {
+                    window.AccederSistema();
+                }
+            });
+            window.AccederSistema = function ()
+            {
+                console.log("Entras");
+                $("#aviso").html("Autenticando...");
+                var xmlhttp = new XMLHttpRequest();
+                var url = getAbsolutePath() + "Seguridad/Login";
+                xmlhttp.open("POST", url, true, "", "");
+                xmlhttp.setRequestHeader("Content-Type", "application/json");
+                xmlhttp.setRequestHeader("accept", "application/json");
+                var sendInfo = { usuario: $("#username").val(), password: $("#password").val() };
+                xmlhttp.send(JSON.stringify(sendInfo));
+                xmlhttp.onreadystatechange = function ()
+                {
+                    if (xmlhttp.readyState === 4) {
+                        if (JSON.parse(xmlhttp.response).permitir == true) {
+                            var aviso = JSON.parse(xmlhttp.response).aviso;
+                            $("#aviso").html(aviso);
+                            setTimeout(function ()
+                            {
+                                var xmlhttp = new XMLHttpRequest();
+                                var url = getAbsolutePath() + "Seguridad/Redirigir";
+                                xmlhttp.open("POST", url, true, "", "");
+                                xmlhttp.setRequestHeader("Content-Type", "application/json");
+                                xmlhttp.setRequestHeader("accept", "application/json");
+                                var sendInfo = { respuesta: "" };
+                                xmlhttp.send(JSON.stringify(sendInfo));
+                                xmlhttp.onreadystatechange = function ()
+                                {
+                                    if (xmlhttp.readyState === 4) {
+                                        window.location.href = JSON.parse(xmlhttp.response).link;
+                                        location.reload();
+                                    }
+                                }
+                            }, 1000);
+                        } else {
+                            var aviso = JSON.parse(xmlhttp.response).aviso;
+                            $("#aviso").html(aviso);
+                        }
+                    }
+                }
+            }
+        </script>
+    @*<script src="~/app/public/login/login.controller.js"></script>*@
+</body>
+</html>
